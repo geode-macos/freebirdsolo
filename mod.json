@@ -1,0 +1,22 @@
+{
+	"geode": "4.6.3",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+	"id": "thebearodactyl.free_bird_solo",
+	"name": "Free Bird Solo",
+	"version": "v1.0.0",
+	"developer": "thebearodactyl",
+	"description": "WANANA WOWNOWNOWNOWNOW",
+  "resources": {
+    "sprites": [
+      "resources/freebirdsolo.png"
+    ],
+    "files": [
+      "resources/freebirdsolo.ogg"
+    ]
+  }
+}
