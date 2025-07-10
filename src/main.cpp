@@ -135,7 +135,7 @@ struct TestPopup : Modify<TestPopup, SupportLayer> {
       free_bird->setPosition(CCPointMake(screen_width / 2, screen_height / 2));
       free_bird->setTextureRect(CCRectMake(0, 0, frame_width, frame_height));
       this->addChild(free_bird, 100000);
-      CCAnimate *animate = animate_spritesheet(free_bird, frame_width, frame_height, 20, 362, 0.109f);
+      CCAnimate *animate = animate_spritesheet(free_bird, frame_width, frame_height, 20, 362, 0.105f);
       auto animator = CCRepeatForever::create(animate);
       free_bird->runAction(animator);
       resize_sprite(free_bird, screen_width, screen_height);
