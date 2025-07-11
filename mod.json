@@ -7,10 +7,15 @@
 		"ios": "2.2074"
 	},
 	"id": "thebearodactyl.free_bird_solo",
-	"name": "Free Bird Solo",
+	"name": "Free Bird Jesus",
 	"version": "v1.0.0",
-	"developer": "thebearodactyl",
-	"description": "WANANA WOWNOWNOWNOWNOW",
+	"developer": "The Bearodactyl",
+	"description": "We're going back in time... to the first thanksgiving... to take turkeys OFF. THE MENU.",
+  "tags": [
+    "offline",
+    "enhancement",
+    "joke"
+  ],
   "resources": {
     "sprites": [
       "resources/freebirdsolo.png"
@@ -18,5 +23,9 @@
     "files": [
       "resources/freebirdsolo.ogg"
     ]
+  },
+  "links": {
+    "homepage": "https://github.com/TheBearodactyl/freebirdsolo",
+    "source": "https://github.com/TheBearodactyl/freebirdsolo"
   }
 }
