@@ -1,3 +1,5 @@
+#include "Geode/cocos/actions/CCAction.h"
+#include "Geode/cocos/actions/CCActionInterval.h"
 #include "fmod.hpp"
 #include "fmod_common.h"
 #include <Geode/Geode.hpp>
@@ -24,7 +26,7 @@ struct TestPopup : Modify<TestPopup, SupportLayer> {
     this->m_fields->m_playing_audio = true;
   }
 
-  CCAnimate *animate_spritesheet(CCSprite *sprite, int frame_width, int frame_height, int frames_per_row, int total_frames, float delay_per_frame) {
+  CCFiniteTimeAction *animate_spritesheet(CCSprite *sprite, int frame_width, int frame_height, int frames_per_row, int total_frames, float delay_per_frame, bool loop) {
     if (! sprite) {
       log::error("animate_spritesheet: sprite is null");
       return nullptr;
@@ -107,7 +109,11 @@ struct TestPopup : Modify<TestPopup, SupportLayer> {
       return nullptr;
     }
 
-    return animate_action;
+    if (loop) {
+      return CCRepeatForever::create(animate_action);
+    } else {
+      return animate_action;
+    }
   }
 
   void resize_sprite(CCSprite *sprite, float width_px, float height_px) {
@@ -135,9 +141,8 @@ struct TestPopup : Modify<TestPopup, SupportLayer> {
       free_bird->setPosition(CCPointMake(screen_width / 2, screen_height / 2));
       free_bird->setTextureRect(CCRectMake(0, 0, frame_width, frame_height));
       this->addChild(free_bird, 100000);
-      CCAnimate *animate = animate_spritesheet(free_bird, frame_width, frame_height, 20, 362, 0.1025f);
-      auto animator = CCRepeatForever::create(animate);
-      free_bird->runAction(animator);
+      CCFiniteTimeAction *animate = animate_spritesheet(free_bird, frame_width, frame_height, 20, 362, 0.1025f, false);
+      free_bird->runAction(animate);
       resize_sprite(free_bird, screen_width, screen_height);
     }
 
