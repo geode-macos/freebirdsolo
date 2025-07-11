@@ -8,7 +8,7 @@
 	},
 	"id": "thebearodactyl.free_bird_solo",
 	"name": "Free Bird Jesus",
-	"version": "v1.0.0",
+	"version": "v1.0.1",
 	"developer": "The Bearodactyl",
 	"description": "We're going back in time... to the first thanksgiving... to take turkeys OFF. THE MENU.",
   "tags": [
@@ -27,5 +27,8 @@
   "links": {
     "homepage": "https://github.com/TheBearodactyl/freebirdsolo",
     "source": "https://github.com/TheBearodactyl/freebirdsolo"
+  },
+  "issues": {
+    "url": "https://github.com/TheBearodactyl/freebirdsolo/issues/new"
   }
 }
