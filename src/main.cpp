@@ -1,29 +1,19 @@
-#include "Geode/cocos/actions/CCAction.h"
-#include "Geode/cocos/actions/CCActionInterval.h"
+#include "Geode/binding/CCMenuItemSpriteExtra.hpp"
+#include "Geode/cocos/sprite_nodes/CCSprite.h"
 #include "fmod.hpp"
 #include "fmod_common.h"
 #include <Geode/Geode.hpp>
 #include <Geode/cocos/cocoa/CCObject.h>
+#include <Geode/modify/MenuLayer.hpp>
 #include <Geode/modify/SupportLayer.hpp>
 
 using namespace geode::prelude;
 
-struct TestPopup : Modify<TestPopup, SupportLayer> {
-  struct Fields {
-    bool m_playing_audio = false;
-    bool m_playing_video = false;
-  };
-
+struct FreeBirdJesusBtn : Modify<FreeBirdJesusBtn, MenuLayer> {
   void play_solo() {
-    auto system = FMODAudioEngine::get()->m_system;
-    FMOD::Channel *channel;
-    FMOD::Sound *sound;
+    auto system = FMODAudioEngine::get();
 
-    system->createSound((Mod::get()->getResourcesDir() / "freebirdsolo.ogg").string().c_str(), FMOD_DEFAULT, nullptr, &sound);
-    system->playSound(sound, nullptr, false, &channel);
-    channel->setVolume(100.0f);
-
-    this->m_fields->m_playing_audio = true;
+    system->playMusic((Mod::get()->getResourcesDir() / "freebirdsolo.ogg").string(), false, 0.0f, 1);
   }
 
   CCFiniteTimeAction *animate_spritesheet(CCSprite *sprite, int frame_width, int frame_height, int frames_per_row, int total_frames, float delay_per_frame, bool loop) {
@@ -129,25 +119,34 @@ struct TestPopup : Modify<TestPopup, SupportLayer> {
     sprite->setScaleY(scaley);
   }
 
-  void onRequestAccess(CCObject *sender) {
+  void onPressBtn(CCObject *sender) {
     auto frame_width = 184 / 2;
     auto frame_height = 60;
+    auto screen_width = CCDirector::sharedDirector()->getWinSize().width;
+    auto screen_height = CCDirector::sharedDirector()->getWinSize().height;
 
-    if (! this->m_fields->m_playing_video) {
-      auto screen_width = CCDirector::sharedDirector()->getWinSize().width;
-      auto screen_height = CCDirector::sharedDirector()->getWinSize().height;
+    CCSprite *free_bird = CCSprite::create("freebirdsolo.png"_spr, CCRectMake(0, 0, frame_width, frame_height));
+    free_bird->setPosition(CCPointMake(screen_width / 2, screen_height / 2));
+    free_bird->setTextureRect(CCRectMake(0, 0, frame_width, frame_height));
+    this->addChild(free_bird, 100000);
+    CCFiniteTimeAction *animate = animate_spritesheet(free_bird, frame_width, frame_height, 20, 362, 0.1025f, false);
+    free_bird->runAction(animate);
+    resize_sprite(free_bird, screen_width, screen_height);
+    play_solo();
+  }
 
-      CCSprite *free_bird = CCSprite::create("freebirdsolo.png"_spr, CCRectMake(0, 0, frame_width, frame_height));
-      free_bird->setPosition(CCPointMake(screen_width / 2, screen_height / 2));
-      free_bird->setTextureRect(CCRectMake(0, 0, frame_width, frame_height));
-      this->addChild(free_bird, 100000);
-      CCFiniteTimeAction *animate = animate_spritesheet(free_bird, frame_width, frame_height, 20, 362, 0.1025f, false);
-      free_bird->runAction(animate);
-      resize_sprite(free_bird, screen_width, screen_height);
-    }
+  bool init() {
+    if (! MenuLayer::init())
+      return false;
 
-    if (! this->m_fields->m_playing_audio) {
-      play_solo();
-    }
+    auto spr = CircleButtonSprite::createWithSprite("menu-btn-sprite.png"_spr);
+    auto free_bird_button = CCMenuItemSpriteExtra::create(spr, this, menu_selector(FreeBirdJesusBtn::onPressBtn));
+
+    auto menu = this->getChildByID("bottom-menu");
+    menu->addChild(free_bird_button);
+    free_bird_button->setID("free_bird_button"_spr);
+    menu->updateLayout();
+
+    return true;
   }
 };

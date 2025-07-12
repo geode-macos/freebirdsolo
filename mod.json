@@ -1,16 +1,16 @@
 {
-	"geode": "4.6.3",
-	"gd": {
-		"win": "2.2074",
-		"android": "2.2074",
-		"mac": "2.2074",
-		"ios": "2.2074"
-	},
-	"id": "the_bearodactyl.free_bird_solo",
-	"name": "Free Bird Jesus",
-	"version": "v1.0.1",
-	"developer": "The Bearodactyl",
-	"description": "We're going back in time... to the first thanksgiving... to take turkeys OFF. THE MENU.",
+  "geode": "4.6.3",
+  "gd": {
+    "win": "2.2074",
+    "android": "2.2074",
+    "mac": "2.2074",
+    "ios": "2.2074"
+  },
+  "id": "the_bearodactyl.free_bird_solo",
+  "name": "Free Bird Jesus",
+  "version": "v1.0.4",
+  "developer": "The Bearodactyl",
+  "description": "We're going back in time... to the first thanksgiving... to take turkeys OFF. THE MENU.",
   "tags": [
     "offline",
     "enhancement",
@@ -18,7 +18,7 @@
   ],
   "resources": {
     "sprites": [
-      "resources/freebirdsolo.png"
+      "resources/*.png"
     ],
     "files": [
       "resources/freebirdsolo.ogg"
