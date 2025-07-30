@@ -125,7 +125,11 @@ struct FreeBirdJesusBtn : Modify<FreeBirdJesusBtn, MenuLayer> {
     auto screen_width = CCDirector::sharedDirector()->getWinSize().width;
     auto screen_height = CCDirector::sharedDirector()->getWinSize().height;
 
+    #ifndef GEODE_IS_IOS
     CCSprite *free_bird = CCSprite::create("freebirdsolo.png"_spr, CCRectMake(0, 0, frame_width, frame_height));
+    #else
+    CCSprite *free_bird = CCSprite::create("freebirdsolo.png"_spr);
+    #endif
     free_bird->setPosition(CCPointMake(screen_width / 2, screen_height / 2));
     free_bird->setTextureRect(CCRectMake(0, 0, frame_width, frame_height));
     this->addChild(free_bird, 100000);
